@@ -204,9 +204,9 @@ if ( basename(__FILE__) == basename($_SERVER["SCRIPT_FILENAME"]) ) { ?>
 		<br>
 		<center>
 		<h1><b>Speedysite</b></h1>
-		<h3>Please log in to edit the pages</h3>
+		<h3>Please enter your login details to begin editing!</h3>
 		<em>Coded by <a href="http://speedysnail6.com">Speedysnail6</a></em>
-		<br>
+		<br /><br />
 	  <button class="btn btn-primary btn-lg" href="#signup" data-toggle="modal" data-target=".bs-modal-sm">Log In</button>
 	  </center>
 	  <br>
@@ -228,7 +228,7 @@ if ( basename(__FILE__) == basename($_SERVER["SCRIPT_FILENAME"]) ) { ?>
 		  <div class="modal-body">
 			<div id="myTabContent" class="tab-content">
 			<div class="tab-pane fade in" id="why">
-			<p><a href="http://speedysnail6.com/speedysite">Speedysite</a> is a lightweight Content Management System that allows you to edit websites without any coding knowledge.</p>
+			<p><a href="http://speedysnail6.com/speedysite">Speedysite</a> is a lightweight Content Management System that allows users to manage websites without any coding knowledge.</p>
 			</div>
 			<div class="tab-pane fade active in" id="signin">
 				<form method="POST" class="form-horizontal" action="speedysite.php">
