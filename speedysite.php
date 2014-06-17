@@ -96,7 +96,7 @@ function ss($name, $section = NULL, $type = NULL, $default = NULL) {
 	}
 }
 if ($_POST['login'] == 'true') {
-	require_once('inf/accounts.php');
+	require_once('inf/config.php');
 	$username = $_POST['username'];
 	$enteredpassword = $_POST['password'];
 	if ($password[$username] == $enteredpassword) {
@@ -105,6 +105,9 @@ if ($_POST['login'] == 'true') {
 	else {
 		echo "Login Failed. Try again";
 	}
+}
+if ($_GET['p'] == 'l') {
+	$_SESSION['ss_loggedin'] = false;
 }
 function editbutton() {
 	if ($_SESSION['ss_loggedin'] == 'true') {
@@ -118,7 +121,7 @@ if ( basename(__FILE__) == basename($_SERVER["SCRIPT_FILENAME"]) ) { ?>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Speedysite | Log in</title>
+    <title>Speedysite</title>
 
     <!-- Bootstrap -->
     <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
@@ -129,10 +132,71 @@ if ( basename(__FILE__) == basename($_SERVER["SCRIPT_FILENAME"]) ) { ?>
       <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
       <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
+	<style type="text/css">
+	.trash { color:rgb(209, 91, 71); }
+	.flag { color:rgb(248, 148, 6); }
+	.panel-body { padding:0px; }
+	.panel-footer .pagination { margin: 0; }
+	.panel .glyphicon,.list-group-item .glyphicon { margin-right:5px; }
+	.panel-body .radio, .checkbox { display:inline-block;margin:0px; }
+	.panel-body input[type=checkbox]:checked + label { text-decoration: line-through;color: rgb(128, 144, 160); }
+	.list-group-item:hover, a.list-group-item:focus {text-decoration: none;background-color: rgb(245, 245, 245);}
+	.list-group { margin-bottom:0px; }
+	</style>
   </head>
   <body>
 <?php if ($_SESSION['ss_loggedin'] == true) {
-header("Location: index.php");
+?>
+<div class="container">
+	<br />
+	<div class="jumbotron">
+		<h2>Speedysite Admin Zone <small>(<a href="?p=l">Log Out</a>)</small></h2>
+		<div class="container">
+					<div class="row">
+						<div class="col-md-6">
+							<div class="panel panel-primary">
+								<div class="panel-heading">
+									<span class="glyphicon glyphicon-asterisk"></span>Content we could find
+								</div>
+								<div class="panel-body">
+									<ul class="list-group">
+										<?php
+										$files = scandir('.');
+										foreach($files as $files=>$files_value) {
+											if(strpos($files_value,'.php') !== false AND $files_value != 'speedysite.php') { ?>
+												<li class="list-group-item">
+													<span class="glyphicon glyphicon-file"></span>
+													<div class="checkbox">
+														<label for="checkbox">
+															<?php echo ucfirst(str_replace('.php', '', $files_value)); ?>
+														</label>
+													</div>
+													<div class="pull-right action-buttons">
+														<a href="<?php echo "$files_value"; ?>" class="flag"><span class="glyphicon glyphicon-globe"></span></a>
+														<a href="<?php echo "$files_value"; ?>?p=a"><span class="glyphicon glyphicon-edit"></span></a>
+														<a href="<?php echo "$files_value"; ?>?p=p" class="trash"><span class="glyphicon glyphicon-wrench glyphicon-flag"></span></a>
+													</div>
+											    </li>
+											<?php }
+										}
+										?>
+									</ul>
+								</div>
+								<div class="panel-footer">
+									<div class="row">
+										<div class="col-md-12">
+											<h6>
+												To edit other files in subdirectories, just go to it and either click the edit button or add to the url "?p=a".</h6>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+	</div>
+</div>
+<?php
 } else { ?>
 <div class="container"> 
 		<hr class="prettyline">
@@ -166,7 +230,7 @@ header("Location: index.php");
 			<p>Speedysite is a lightweight Content Management System that allows you to edit websites without any coding knowledge.</p>
 			</div>
 			<div class="tab-pane fade active in" id="signin">
-				<form method="POST" class="form-horizontal">
+				<form method="POST" class="form-horizontal" action="speedysite.php">
 				<input type="hidden" name="login" value="true">
 				<fieldset>
 				<!-- Sign In Form -->
