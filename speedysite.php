@@ -194,6 +194,7 @@ if ( basename(__FILE__) == basename($_SERVER["SCRIPT_FILENAME"]) ) { ?>
 						</div>
 					</div>
 				</div>
+			<p>For help with Speedysite. Please take a look at the <a href="http://speedysnail6.com/speedysite">website</a>.
 	</div>
 </div>
 <?php
