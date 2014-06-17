@@ -81,8 +81,8 @@ function ss($name, $section = NULL, $type = NULL, $default = NULL) {
 	}
 	if ($_GET['p'] == 'a' AND $_SESSION['ss_loggedin'] == true) { 
 ?>
-<form method="POST" action=""><fieldset style="border: 0px;">
-<input type="hidden" name="SaveSection" value="true">
+<form method="POST">
+<input type="hidden" name="SaveSection" value="true" />
 <input type="hidden" name="name" value="<?php echo $name; ?>">
 <div class="prut8Eje" id="<?php echo $name; ?>_content" style="width:100%; height: auto;">
 <?php echo file_get_contents($file); ?>
