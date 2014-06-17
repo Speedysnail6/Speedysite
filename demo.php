@@ -1,7 +1,12 @@
-<?php include_once('../speedysite.php'); ?>
+<?php 
+$showheader = true;
+include_once('speedysite.php'); ?>
 <!DOCTYPE html>
 <html>
 <body>
+<head>
+<?php ss_header(); ?>
+</head>
 <?php editbutton(); ?>
 <div id="container" style="width: 100%">
 
