@@ -51,7 +51,7 @@ if (!file_exists('inf')) {
 	mkdir('inf');
 
 }
-if (!file_exists('inf/accounts.php')) {
+if (!file_exists('inf/config.php')) {
 	file_put_contents("inf/config.php", '
 <?php
 //The Accounts.
