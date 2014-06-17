@@ -1,5 +1,8 @@
-<script src="//tinymce.cachefly.net/4.0/tinymce.min.js"></script>
-<script type="text/javascript">
+<?php
+session_start();
+$header = "
+<script src=\"//tinymce.cachefly.net/4.0/tinymce.min.js\"></script>
+<script type=\"text/javascript\">
 tinymce.PluginManager.add('menusave', function(editor, url) {
     editor.addMenuItem('menusave', {
         text: 'Save',
@@ -10,12 +13,12 @@ tinymce.PluginManager.add('menusave', function(editor, url) {
     });
 });
 tinymce.init({
-    selector: "div.prut8Eje",
+    selector: \"div.prut8Eje\",
     inline: true,
     plugins: [
-        "advlist autolink lists link image charmap print preview anchor save",
-        "searchreplace visualblocks code fullscreen",
-        "insertdatetime media table contextmenu paste"
+        \"advlist autolink lists link image charmap print preview anchor save\",
+        \"searchreplace visualblocks code fullscreen\",
+        \"insertdatetime media table textcolor contextmenu paste\"
     ],
 	menu : { // this is the complete default configuration
         file   : {title : 'File'  , items : 'newdocument | print'},
@@ -26,20 +29,32 @@ tinymce.init({
         table  : {title : 'Table' , items : 'inserttable tableprops deletetable | cell row column'},
         tools  : {title : 'Tools' , items : 'spellchecker code'}
     },
-    toolbar: "save | insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image"
+    toolbar: \"save | insertfile undo redo | styleselect  | bold italic forecolor backcolor | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image\"
 });
 </script>
-
-<?php
-session_set_cookie_params(3999,"/");
-session_start();
+"; 
+if ($showheader != true) {
+	echo $header;
+}
+else {
+	function ss_header($r = NULL) {
+		global $header;
+		if ($r) {
+			return $header;
+		}
+		else {
+			echo $header;
+		}
+	}
+}
 if (!file_exists('inf')) {
 	mkdir('inf');
 
 }
 if (!file_exists('inf/accounts.php')) {
-	file_put_contents("inf/accounts.php", '<?php
-//The Usernames and Passwords
+	file_put_contents("inf/config.php", '
+<?php
+//The Accounts.
 $password = array("admin" => "password");
 ?>');
 
