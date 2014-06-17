@@ -150,10 +150,10 @@ if ( basename(__FILE__) == basename($_SERVER["SCRIPT_FILENAME"]) ) { ?>
 <div class="container">
 	<br />
 	<div class="jumbotron">
-		<h2>Speedysite Admin Zone <small>(<a href="?p=l">Log Out</a>)</small></h2>
+		<h2 style="text-align: center;">Speedysite Admin Zone <small>(<a href="?p=l">Log Out</a>)</small></h2>
 		<div class="container">
 					<div class="row">
-						<div class="col-md-6">
+						<div class="col-md-12">
 							<div class="panel panel-primary">
 								<div class="panel-heading">
 									<span class="glyphicon glyphicon-asterisk"></span>Content we could find
