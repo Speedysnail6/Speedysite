@@ -77,7 +77,7 @@ if ($_POST['saveothers'] == 'true&') {
 		}
 	}
 }
-function ss($name, $section = NULL, $type = NULL, $default = NULL) {
+function ss($name, $section = NULL, $type = NULL, $default = NULL, $return = 'null') {
 	global $fields;
 	$file = "inf/$name.html";
 	array_push($fields, array($name, $section, $type));
@@ -101,7 +101,7 @@ function ss($name, $section = NULL, $type = NULL, $default = NULL) {
 <?php
 	}
 	else {
-		echo file_get_contents($file);
+		if ($return) { return file_get_contents($file); } else { echo file_get_contents($file); }
 	}
 }
 function editothers($h=NULL) {
