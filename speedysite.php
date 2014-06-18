@@ -1,4 +1,5 @@
 <?php
+$fields = array();
 session_start();
 $header = "
 <script src=\"//tinymce.cachefly.net/4.0/tinymce.min.js\"></script>
@@ -67,10 +68,19 @@ if ($_POST['SaveSection'] == true) {
         $content = str_replace('&quot;', '', $content2);
         file_put_contents("inf/$thename.html", $content);
 }
-$fields = array('red');
+if ($_POST['saveothers'] == 'true&') {
+	if ($_SESSION['ss_loggedin'] == true) {
+		foreach($_POST as $thing=>$result) {
+			if ($thing != 'saveothers' AND $result != 'true&') {
+				file_put_contents("inf/$thing.html", $result);
+			}
+		}
+	}
+}
 function ss($name, $section = NULL, $type = NULL, $default = NULL) {
 	global $fields;
 	$file = "inf/$name.html";
+	array_push($fields, array($name, $section, $type));
 	if (!file_exists($file)) {
 		if ($default) {
 			file_put_contents($file, $default);
@@ -79,7 +89,7 @@ function ss($name, $section = NULL, $type = NULL, $default = NULL) {
 			file_put_contents($file, '<p>Please edit this text on the Speedysite <a href="speedysite.php">admin</a> page.</p>');
 		}
 	}
-	if ($_GET['p'] == 'a' AND $_SESSION['ss_loggedin'] == true) { 
+	if ($_GET['p'] == 'a' AND $_SESSION['ss_loggedin'] == true AND !$section) { 
 ?>
 <form method="POST">
 <input type="hidden" name="SaveSection" value="true" />
@@ -91,8 +101,28 @@ function ss($name, $section = NULL, $type = NULL, $default = NULL) {
 <?php
 	}
 	else {
-		array_push($fields, "blue","yellow");
 		echo file_get_contents($file);
+	}
+}
+function editothers($h=NULL) {
+	global $fields;
+	if ($_GET['p'] == 'a' AND $_SESSION['ss_loggedin'] == true) {
+		if ($h) { echo "<h2>$h</h2>"; } else { echo "<h2>Other Settings</h2>"; }
+		echo "<form method='post' class='ss_otherform'>";
+		echo "<input type='hidden' name='saveothers' value='true&' />";
+		foreach($fields as $result) {
+			if ($result[2] != 'textarea' AND $result[1] == 'othersettings') { ?>
+				<label class="ss_label"><?php echo ucfirst($result[0]); ?>:</label> <input type="<?php echo $result[2]; ?>" class="ss_input" name="<?php echo $result[0]; ?>" value="<?php echo file_get_contents("inf/$result[0].html"); ?>" /><br />
+			<?php 
+			}
+			elseif ($result[2] == 'textarea') { ?>
+			<label class="ss_label"><?php echo ucfirst($result[0]); ?>:</label><br /><?php echo "<textarea class=\"ss_textarea\" name=\"$result[0]\">". file_get_contents("inf/$result[0].html") ."</textarea>"; ?>
+			<?php
+			} ?>
+		<?php	
+		}
+		echo "<br /><input type='submit' class='ss_submit' value='Save' />";
+		echo "</form>";
 	}
 }
 if ($_POST['login'] == 'true') {
@@ -174,7 +204,6 @@ if ( basename(__FILE__) == basename($_SERVER["SCRIPT_FILENAME"]) ) { ?>
 													<div class="pull-right action-buttons">
 														<a href="<?php echo "$files_value"; ?>" class="flag"><span class="glyphicon glyphicon-globe"></span></a>
 														<a href="<?php echo "$files_value"; ?>?p=a"><span class="glyphicon glyphicon-edit"></span></a>
-														<a href="<?php echo "$files_value"; ?>?p=p" class="trash"><span class="glyphicon glyphicon-wrench glyphicon-flag"></span></a>
 													</div>
 											    </li>
 											<?php }

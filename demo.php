@@ -12,7 +12,7 @@ include_once('speedysite.php'); ?>
 ss_header();
 ?>
 <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
-<title>Speedysite Demo</title>
+<title><?php ss('Title', 'othersettings', 'text', 'Speedysite Demo'); ?></title>
 </head>
 <body>
 <?php
@@ -67,7 +67,7 @@ editbutton();
 	</div>
 	<div class="row clearfix">
 		<div class="col-md-4 column">
-			<?php ss('demo1stcolumn', '', '', '<h2>
+			<?php ss('demo1stcolumn', NULL, NULL, '<h2>
 				Why use Speedysite?
 			</h2>
 			<p>
@@ -78,7 +78,7 @@ editbutton();
 			</p>'); ?>
 		</div>
 		<div class="col-md-4 column">
-			<?php ss('demo2ndcolumn', '', '', '<h2>
+			<?php ss('demo2ndcolumn', NULL, NULL, '<h2>
 				Umm... why else?
 			</h2>
 			<p>
@@ -89,7 +89,7 @@ editbutton();
 			</p>'); ?>
 		</div>
 		<div class="col-md-4 column">
-			<?php ss('demo3rdcolumn', '', '', '<h2>
+			<?php ss('demo3rdcolumn', NULL, NULL, '<h2>
 				How much does it cost?
 			</h2>
 			<p>
@@ -98,6 +98,11 @@ editbutton();
 			<p>
 				<a class="btn btn-default" href="http://speedysnail6.com/speedysite">View details &#187;</a>
 			</p>'); ?>
+		</div>
+	</div>
+	<div class="row clearfix">
+		<div class="container">
+			<?php editothers('Preferences'); ?>
 		</div>
 	</div>
 </div>
