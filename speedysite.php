@@ -77,7 +77,7 @@ if ($_POST['saveothers'] == 'true&') {
 		}
 	}
 }
-function ss($name, $section = NULL, $type = NULL, $default = NULL, $return = 'null') {
+function ss($name, $section = NULL, $type = NULL, $default = NULL, $return = null) {
 	global $fields;
 	$file = "inf/$name.html";
 	array_push($fields, array($name, $section, $type));
