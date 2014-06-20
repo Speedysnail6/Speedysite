@@ -1,4 +1,6 @@
 <?php
+//Speedysite 0.8
+//Please use this for non-commercial use only unless a license was purchased from our website. http://speedysnail6.com/speedysite
 $fields = array();
 session_start();
 $header = "
