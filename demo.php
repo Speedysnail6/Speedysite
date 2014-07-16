@@ -2,8 +2,8 @@
 //Tells speedysite not to plop the header on the top, but to let us handle it
 $showheader = true;
 
-//Includes speedysite
-include_once('speedysite.php'); ?>
+//Requires speedysite
+require_once('speedysite.php'); ?>
 <!DOCTYPE html>
 <html>
 <head>
