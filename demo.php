@@ -100,11 +100,18 @@ editbutton();
 			</p>'); ?>
 		</div>
 	</div>
+	<?php
+	if (editmode()) {
+	?>
 	<div class="row clearfix">
+		<hr />
 		<div class="container">
 			<?php editothers('Preferences'); ?>
 		</div>
 	</div>
+	<?php
+	}
+	?>
 </div>
 </body>
 </html> 

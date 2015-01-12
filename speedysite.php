@@ -3,6 +3,9 @@
 //Please use this for non-commercial use only unless a license was purchased from our website. http://speedysnail6.com/speedysite
 $fields = array();
 session_start();
+if (!isset($_SESSION['ss_loggedin'])) {
+	$_SESSION['ss_loggedin'] = false;
+}
 $header = "
 <script src=\"//tinymce.cachefly.net/4.0/tinymce.min.js\"></script>
 <script type=\"text/javascript\">
@@ -36,7 +39,7 @@ tinymce.init({
 });
 </script>
 "; 
-if ($showheader != true) {
+if (isset($showheader) AND $showheader != true) {
 	echo $header;
 }
 else {
@@ -62,7 +65,7 @@ $password = array("admin" => "password");
 ?>');
 
 }
-if ($_POST['SaveSection'] == true) {
+if (isset($_POST['SaveSection']) and $_POST['SaveSection'] == true) {
 	$thename = $_POST['name'];
         $namecontent = $_POST['name'] . '_content';
         $content1 = str_replace('\\', '', $_POST[$namecontent]);
@@ -70,7 +73,7 @@ if ($_POST['SaveSection'] == true) {
         $content = str_replace('&quot;', '', $content2);
         file_put_contents("inf/$thename.html", $content);
 }
-if ($_POST['saveothers'] == 'true&') {
+if (isset($_POST['saveothers']) and $_POST['saveothers'] == 'true') {
 	if ($_SESSION['ss_loggedin'] == true) {
 		foreach($_POST as $thing=>$result) {
 			if ($thing != 'saveothers' AND $result != 'true&') {
@@ -91,7 +94,7 @@ function ss($name, $section = NULL, $type = NULL, $default = NULL, $return = nul
 			file_put_contents($file, '<p>Please edit this text on the Speedysite <a href="speedysite.php">admin</a> page.</p>');
 		}
 	}
-	if ($_GET['p'] == 'a' AND $_SESSION['ss_loggedin'] == true AND !$section) { 
+	if (isset($_GET['p']) and $_GET['p'] == 'a' AND $_SESSION['ss_loggedin'] == true AND !$section) { 
 ?>
 <form method="POST">
 <input type="hidden" name="SaveSection" value="true" />
@@ -108,7 +111,7 @@ function ss($name, $section = NULL, $type = NULL, $default = NULL, $return = nul
 }
 function editothers($h=NULL) {
 	global $fields;
-	if ($_GET['p'] == 'a' AND $_SESSION['ss_loggedin'] == true) {
+	if (isset($_GET['p']) and $_GET['p'] == 'a' AND $_SESSION['ss_loggedin'] == true) {
 		if ($h) { echo "<h2>$h</h2>"; } else { echo "<h2>Other Settings</h2>"; }
 		echo "<form method='post' class='ss_otherform'>";
 		echo "<input type='hidden' name='saveothers' value='true&' />";
@@ -127,7 +130,17 @@ function editothers($h=NULL) {
 		echo "</form>";
 	}
 }
-if ($_POST['login'] == 'true') {
+
+function editmode() {
+	if (isset($_GET['p']) and $_GET['p'] == 'a' and $_SESSION['ss_loggedin'] == true) {
+		return true;
+	}
+	else {
+		return false;
+	}
+}
+
+if (isset($_POST['login']) and $_POST['login'] == 'true') {
 	require_once('inf/config.php');
 	$username = $_POST['username'];
 	$enteredpassword = $_POST['password'];
@@ -138,7 +151,7 @@ if ($_POST['login'] == 'true') {
 		echo "Login Failed. Try again";
 	}
 }
-if ($_GET['p'] == 'l') {
+if (isset($_GET['p']) and $_GET['p'] == 'l') {
 	$_SESSION['ss_loggedin'] = false;
 }
 function editbutton() {
