@@ -73,7 +73,7 @@ if (isset($_POST['SaveSection']) and $_POST['SaveSection'] == true) {
         $content = str_replace('&quot;', '', $content2);
         file_put_contents("inf/$thename.html", $content);
 }
-if (isset($_POST['saveothers']) and $_POST['saveothers'] == 'true') {
+if (isset($_POST['saveothers']) and $_POST['saveothers'] == 'true&') {
 	if ($_SESSION['ss_loggedin'] == true) {
 		foreach($_POST as $thing=>$result) {
 			if ($thing != 'saveothers' AND $result != 'true&') {
