@@ -9,7 +9,7 @@ if (!isset($_SESSION['ss_loggedin'])) {
 
 require_once('inf/config.php');
 
-if (!isset($speedysite_file_name) {
+if (!isset($speedysite_file_name)) {
 	$speedysite_file_name = 'speedysite.php';
 }
 
