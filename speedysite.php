@@ -6,6 +6,13 @@ session_start();
 if (!isset($_SESSION['ss_loggedin'])) {
 	$_SESSION['ss_loggedin'] = false;
 }
+
+require_once('inf/config.php');
+
+if (!isset($speedysite_file_name) {
+	$speedysite_file_name = 'speedysite.php';
+}
+
 $header = "
 <script src=\"//tinymce.cachefly.net/4.0/tinymce.min.js\"></script>
 <script type=\"text/javascript\">
@@ -91,7 +98,7 @@ function ss($name, $section = NULL, $type = NULL, $default = NULL, $return = nul
 			file_put_contents($file, $default);
 		}
 		else {
-			file_put_contents($file, '<p>Please edit this text on the Speedysite <a href="speedysite.php">admin</a> page.</p>');
+			file_put_contents($file, '<p>Please edit this text on the Speedysite <a href="<?php echo $speedysite_file_name; ?>">admin</a> page.</p>');
 		}
 	}
 	if (isset($_GET['p']) and $_GET['p'] == 'a' AND $_SESSION['ss_loggedin'] == true AND !$section) { 
@@ -208,7 +215,7 @@ if ( basename(__FILE__) == basename($_SERVER["SCRIPT_FILENAME"]) ) { ?>
 										<?php
 										$files = scandir('.');
 										foreach($files as $files=>$files_value) {
-											if(strpos($files_value,'.php') !== false AND $files_value != 'speedysite.php') { ?>
+											if(strpos($files_value,'.php') !== false AND $files_value != $speedysite_file_name) { ?>
 												<li class="list-group-item">
 													<span class="glyphicon glyphicon-file"></span>
 													<div class="checkbox">
@@ -275,7 +282,7 @@ if ( basename(__FILE__) == basename($_SERVER["SCRIPT_FILENAME"]) ) { ?>
 			<p><a href="http://speedysnail6.com/speedysite">Speedysite</a> is a lightweight Content Management System that allows users to manage websites without any coding knowledge.</p>
 			</div>
 			<div class="tab-pane fade active in" id="signin">
-				<form method="POST" class="form-horizontal" action="speedysite.php">
+				<form method="POST" class="form-horizontal" action="<?php echo $speedysite_file_name; ?>">
 				<input type="hidden" name="login" value="true">
 				<fieldset>
 				<!-- Sign In Form -->
