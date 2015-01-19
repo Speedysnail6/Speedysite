@@ -7,6 +7,15 @@ if (!isset($_SESSION['ss_loggedin'])) {
 	$_SESSION['ss_loggedin'] = false;
 }
 
+if (!file_exists('inf/config.php')) {
+	file_put_contents("inf/config.php", '
+<?php
+//The Accounts.
+$password = array("admin" => "password");
+?>');
+
+}
+
 require_once('inf/config.php');
 
 if (!isset($speedysite_file_name)) {
@@ -64,14 +73,7 @@ if (!file_exists('inf')) {
 	mkdir('inf');
 
 }
-if (!file_exists('inf/config.php')) {
-	file_put_contents("inf/config.php", '
-<?php
-//The Accounts.
-$password = array("admin" => "password");
-?>');
 
-}
 if (isset($_POST['SaveSection']) and $_POST['SaveSection'] == true) {
 	$thename = $_POST['name'];
         $namecontent = $_POST['name'] . '_content';
