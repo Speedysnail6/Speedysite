@@ -16,6 +16,11 @@ $password = array("admin" => "password");
 
 }
 
+if (!file_exists('inf')) {
+	mkdir('inf');
+
+}
+
 require_once('inf/config.php');
 
 if (!isset($speedysite_file_name)) {
@@ -69,10 +74,7 @@ else {
 		}
 	}
 }
-if (!file_exists('inf')) {
-	mkdir('inf');
 
-}
 
 if (isset($_POST['SaveSection']) and $_POST['SaveSection'] == true) {
 	$thename = $_POST['name'];
