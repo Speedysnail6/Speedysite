@@ -150,6 +150,17 @@ function editmode() {
 		return false;
 	}
 }
+function editbutton() {
+	global $speedysite_file_name;
+	if ($_SESSION['ss_loggedin'] == 'true') {
+		if (!editmode()) {
+			echo "<div style='position: fixed; top:0px; right: 0px; background:black; padding-left: 10px; padding-top: 10px; padding-right: 10px; border-top-left-radius: 5px;border-bottom-left-radius: 5px;'><p><a href='?p=a' style='color: blue;'>Edit</a></p></div>";
+		}
+		else {
+			echo "<div style='width: 100%; height: 100px; background:black;'><center><br /><h4 style='text-decoration: underline; color: white; '>Speedysite Edit Mode</h4><p size: 18px; color: white;'><a href='$speedysite_file_name' style='color: blue;'>Dashboard</a> | <a href='?p=v' style='color: blue;'>Stop Editing</a></p></center></div>";
+		}
+	}
+}
 
 if (isset($_POST['login']) and $_POST['login'] == 'true') {
 	require_once('inf/config.php');
@@ -164,11 +175,6 @@ if (isset($_POST['login']) and $_POST['login'] == 'true') {
 }
 if (isset($_GET['p']) and $_GET['p'] == 'l') {
 	$_SESSION['ss_loggedin'] = false;
-}
-function editbutton() {
-	if ($_SESSION['ss_loggedin'] == 'true') {
-		echo "<div style='position: fixed; top:0px; right: 0px;'><p><a href='?p=a'>Edit</a></p></div>";
-	}
 }
 if ( basename(__FILE__) == basename($_SERVER["SCRIPT_FILENAME"]) ) { ?>
 <!DOCTYPE html>
