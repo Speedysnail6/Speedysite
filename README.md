@@ -5,4 +5,4 @@ Speedysite is a one-file content management system. It was made to make it easie
 
 ***
 
-[Download](https://github.com/Speedysnail6/Speedysite/releases) | [Source](https://github.com/Speedysnail6/Speedysite) | [Docs](https://github.com/) | [Demo](http://speedysnail6.com/speedysite)
+[Download](https://github.com/Speedysnail6/Speedysite/releases) | [Source](https://github.com/Speedysnail6/Speedysite) | [Docs](https://github.com/Speedysnail6/Speedysite/wiki) | [Demo](http://speedysnail6.com/speedysite)
