@@ -409,4 +409,3 @@ if (isset($_GET['u']) and isset($_GET['v']) and $_GET['u'] == 't') {
 <?php
 }
 ?>
-?>
