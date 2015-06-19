@@ -1,9 +1,15 @@
 <?php
-//Speedysite 0.8
+
+
 $fields = array();
 session_start();
 if (!isset($_SESSION['ss_loggedin'])) {
 	$_SESSION['ss_loggedin'] = false;
+}
+
+if (!file_exists('inf')) {
+	mkdir('inf');
+
 }
 
 if (!file_exists('inf/config.php')) {
@@ -12,11 +18,6 @@ if (!file_exists('inf/config.php')) {
 //The Accounts.
 $password = array("admin" => "password");
 ?>');
-
-}
-
-if (!file_exists('inf')) {
-	mkdir('inf');
 
 }
 
@@ -207,11 +208,77 @@ if ( basename(__FILE__) == basename($_SERVER["SCRIPT_FILENAME"]) ) { ?>
   </head>
   <body>
 <?php if ($_SESSION['ss_loggedin'] == true) {
+
+if(!isset($_SESSION['update_checks'])) {
+	$_SESSION['update_checks'] = 0; 
+}
+
+	$_SESSION['update_checks'] = $_SESSION['update_checks'] + 1;
+	$url="https://api.github.com/repos/speedysnail6/speedysite/releases";
+
+	$ch = curl_init();
+	// Disable SSL verification
+	curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+	// Will return the response, if false it print the response
+	curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+	// Set the url
+	curl_setopt($ch, CURLOPT_URL,$url);
+	curl_setopt($ch,CURLOPT_USERAGENT,'Mozilla/5.0 (Windows; U; Windows NT 5.1; en-US; rv:1.8.1.13) Gecko/20080311 Firefox/2.0.0.13');
+	// Execute
+	$result=curl_exec($ch);
+	// Closing
+	curl_close($ch);
+
+	$latest_version = str_replace('v', null, json_decode($result)[0]->tag_name);
+	
+	if ($latest_version > $speedysite_version) {
+		$update_avalible = true;
+	}
+}
+
+if (isset($_GET['u']) and isset($_GET['v']) and $_GET['u'] == 't') {
+	$_SESSION['update_checks'] = $_SESSION['update_checks'] + 1;
+	
+	$url="https://raw.githubusercontent.com/Speedysnail6/Speedysite/v". $_GET['v'] ."/speedysite.php";
+	
+	if(file_put_contents($speedysite_file_name, file_get_contents($url))) {
+		$update_success = true;
+	}
+	else {
+		$update_success = false;
+	}
+	
+}
 ?>
 <div class="container">
 	<br />
 	<div class="jumbotron">
 		<h2 style="text-align: center;">Speedysite Admin Zone <small>(<a href="?p=l">Log Out</a>)</small></h2>
+		<?php
+		if (isset($update_avalible) and $update_avalible == true) {
+		?>
+		<div class="alert alert-info alert-dismissible" role="alert">
+		  <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+		  <strong>Speedysite <?php echo $latest_version; ?> is out!</strong> Click <a href="?u=t&v=<?php echo $latest_version; ?>">here</a> to instantly update.<strong>
+		</div>
+		<?php }
+		if (isset($update_success) and $update_success == true) {
+		?>
+		<div class="alert alert-success alert-dismissible" role="alert">
+		  <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+		  <strong>Speedysite has updated to <?php echo $_GET['v']; ?>!</strong> <a href="<?php echo $speedysite_file_name; ?>">Refresh</a> to see changes.<strong>
+		</div>
+		<?php
+		}
+		elseif (isset($update_success) and $update_success == false) {
+		?>
+		<div class="alert alert-danger alert-dismissible" role="alert">
+		  <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+		  <strong>There was an error updating to <?php echo $_GET['v']; ?>.</strong><strong>
+		</div>
+		<?php
+		}
+		?>
 		<div class="container">
 					<div class="row">
 						<div class="col-md-12">
