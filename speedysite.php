@@ -1,5 +1,7 @@
 <?php
+//Speedysite 1.1
 
+$speedysite_version = '1.1';
 
 $fields = array();
 session_start();
@@ -213,6 +215,7 @@ if(!isset($_SESSION['update_checks'])) {
 	$_SESSION['update_checks'] = 0; 
 }
 
+if($_SESSION['update_checks'] < 20 or isset($allow_update_checks) and $allow_update_checks == true and $_SESSION['update_checks'] < 20) {
 	$_SESSION['update_checks'] = $_SESSION['update_checks'] + 1;
 	$url="https://api.github.com/repos/speedysnail6/speedysite/releases";
 
@@ -405,4 +408,5 @@ if (isset($_GET['u']) and isset($_GET['v']) and $_GET['u'] == 't') {
 </html>
 <?php
 }
+?>
 ?>
