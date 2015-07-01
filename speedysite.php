@@ -62,18 +62,16 @@ tinymce.init({
 });
 </script>
 "; 
-if (isset($showheader) AND $showheader != true) {
+if (isset($showheader) AND $showheader != false or !isset($showheader)) {
 	echo $header;
 }
-else {
-	function ss_header($r = NULL) {
-		global $header;
-		if ($r) {
-			return $header;
-		}
-		else {
-			echo $header;
-		}
+function ss_header($r = NULL) {
+	global $header;
+	if ($r) {
+		return $header;
+	}
+	else {
+		echo $header;
 	}
 }
 
@@ -95,7 +93,7 @@ if (isset($_POST['saveothers']) and $_POST['saveothers'] == 'true&') {
 		}
 	}
 }
-function ss($name, $section = NULL, $type = NULL, $default = NULL, $return = null) {
+function ss($name, $default = NULL, $section = NULL, $type = NULL, $return = null) {
 	global $fields;
 	$file = "inf/$name.html";
 	array_push($fields, array($name, $section, $type));

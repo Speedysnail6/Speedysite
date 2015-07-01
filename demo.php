@@ -1,8 +1,8 @@
 <?php
 //Tells speedysite not to plop the header on the top, but to let us handle it
-$showheader = true;
+$showheader = false;
 
-//Requires speedysite
+//Adds speedysite
 require_once('speedysite.php'); ?>
 <!DOCTYPE html>
 <html>
@@ -12,12 +12,16 @@ require_once('speedysite.php'); ?>
 ss_header();
 ?>
 <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
-<title><?php ss('Title', 'othersettings', 'text', 'Speedysite Demo'); ?></title>
+<title><?php ss('Title', 'Speedysite Demo', 'othersettings', 'text'); ?></title>
 </head>
 <body>
 <?php
 //This makes a small edit button appear on the page when the user is logged in
 editbutton();
+?>
+<?php
+$hello = `dasfffffffffffffffffffffffffff`;
+echo $hello;
 ?>
 <br />
 <div class="container">
@@ -53,7 +57,7 @@ editbutton();
 				
 			</nav>
 			<div class="jumbotron">
-				<?php ss('mainsection', NULL, NULL, '<h1>
+				<?php ss('mainsection', '<h1>
 					This is Speedysite
 				</h1>
 				<p>
@@ -67,7 +71,7 @@ editbutton();
 	</div>
 	<div class="row clearfix">
 		<div class="col-md-4 column">
-			<?php ss('demo1stcolumn', NULL, NULL, '<h2>
+			<?php ss('demo1stcolumn', '<h2>
 				Why use Speedysite?
 			</h2>
 			<p>
@@ -78,7 +82,7 @@ editbutton();
 			</p>'); ?>
 		</div>
 		<div class="col-md-4 column">
-			<?php ss('demo2ndcolumn', NULL, NULL, '<h2>
+			<?php ss('demo2ndcolumn', '<h2>
 				Umm... why else?
 			</h2>
 			<p>
@@ -89,7 +93,7 @@ editbutton();
 			</p>'); ?>
 		</div>
 		<div class="col-md-4 column">
-			<?php ss('demo3rdcolumn', NULL, NULL, '<h2>
+			<?php ss('demo3rdcolumn', '<h2>
 				How much does it cost?
 			</h2>
 			<p>
