@@ -78,7 +78,7 @@ echo $hello;
 				You only need to upload one file to install Speedysite, and not even that. On our <a href="http://speedysnail6.com/speedysite">website</a> you can give the site the FTP details, and it&#39;ll do it for you. You can even configure the accounts and stuff from there! No pesky file configuration needed.
 			</p>
 			<p>
-				<a class="btn btn-default" href="http://speedysnail6.com/speedysitehttp://speedysnail6.com/speedysite">View details &#187;</a>
+				<a class="btn btn-default" href="http://github.com/speedysnail6/speedysite">View details &#187;</a>
 			</p>'); ?>
 		</div>
 		<div class="col-md-4 column">
@@ -89,7 +89,7 @@ echo $hello;
 				Although this demo page may be confusing, you only need one line of code that we give you to connect to Speedysite, and another to make a specific section editable. It&#39;s much easier than hooking it up with a big CMS such as WordPress or Drupal.
 			</p>
 			<p>
-				<a class="btn btn-default" href="http://speedysnail6.com/speedysite">View details &#187;</a>
+				<a class="btn btn-default" href="http://github.com/speedysnail6/speedysite">View details &#187;</a>
 			</p>'); ?>
 		</div>
 		<div class="col-md-4 column">
@@ -97,10 +97,10 @@ echo $hello;
 				How much does it cost?
 			</h2>
 			<p>
-				If you want to use Speedysite for a personal website or page, it&#39;s absolutely <span style="color: green">FREE</span>. If you want to use Speedysite for a single commercial website, it costs money. Also, if you&#39;re a develpoper and you want to use Speedysite for unlimited commercial use, you can get a licence too.
+				Speedysite is 100% free for everybody! This can be used for commercial or personal use and you can modify it without attribution!
 			</p>
 			<p>
-				<a class="btn btn-default" href="http://speedysnail6.com/speedysite">View details &#187;</a>
+				<a class="btn btn-default" href="http://github.com/speedysnail6/speedysite">View details &#187;</a>
 			</p>'); ?>
 		</div>
 	</div>
